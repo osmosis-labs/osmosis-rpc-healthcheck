@@ -79,7 +79,8 @@ class TimeController():
                 else:
                     # Check if it's epoch before updating state
                     dt_current_epoch = self.dt_last_epoch + timedelta(days=1)
-                    if dt_latest_block_time >= dt_current_epoch:
+                    dt_latest_block_time_threshold = dt_latest_block_time + timedelta(seconds=8)
+                    if dt_latest_block_time_threshold >= dt_current_epoch:
                         self.is_epoch = True
                         self.dt_last_epoch = dt_current_epoch
                     else:
