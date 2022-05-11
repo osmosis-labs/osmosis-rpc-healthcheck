@@ -14,7 +14,7 @@ DEFAULT_LOG_LEVEL = "INFO"
 RPC_NODE = os.environ['RPC_NODE']
 
 # LAST_EPOCH_START_TIME: Time at which last epoch started (format "2021-06-18T17:00:00Z")
-LAST_EPOCH_START_TIME = os.environ['LAST_EPOCH_START_TIME']
+#LAST_EPOCH_START_TIME = os.environ['LAST_EPOCH_START_TIME']
 
 # SLACK_WEBHOOK: slack incoming webhook to send alerts
 SLACK_WEBHOOK = os.getenv('SLACK_WEBHOOK')
@@ -39,7 +39,7 @@ app = FastAPI()
 
 controller = TimeController(
     rpc = RPC_NODE,
-    epoch_start_time = LAST_EPOCH_START_TIME,
+    #epoch_start_time = LAST_EPOCH_START_TIME,
     check_interval = CHECK_INTERVAL,
     new_block_threshold = NEW_BLOCK_THRESHOLD,
     slack_webhook = SLACK_WEBHOOK
