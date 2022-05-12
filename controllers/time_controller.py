@@ -1,6 +1,6 @@
 from .common import call_endpoint
 
-import urllib 
+import urllib
 import logging
 import asyncio
 from datetime import datetime, timezone, timedelta
@@ -14,7 +14,7 @@ class TimeController():
         self.rpc = rpc
         self.check_interval = int(check_interval)
         self.new_block_threshold = int(new_block_threshold)
-        
+
         self.node_info = self.get_node_info()
         self.sync_info = None
 
@@ -30,7 +30,7 @@ class TimeController():
         response = call_endpoint(url)
         data = response.json()
         return data["result"]["node_info"]
-    
+
     def get_sync_info(self):
 
         url = urllib.parse.urljoin(self.rpc, "/status")
@@ -64,17 +64,17 @@ class TimeController():
                 dt_latest_block_time = parser.parse(latest_block_time)
                 dt_now = datetime.now(timezone.utc)
                 seconds_since_latest_block = (dt_now - dt_latest_block_time).total_seconds()
-                
+
                 # Node is fetching blocks
                 if (seconds_since_latest_block <= self.new_block_threshold):
                     logging.info("✅ {rpc} in sync [ 🕒 {s:.3f}(s) since block {b} ]".format(
-                        rpc = self.rpc, 
-                        s   = seconds_since_latest_block, 
+                        rpc = self.rpc,
+                        s   = seconds_since_latest_block,
                         b   = latest_block_height))
-                    
+
                     self.set_synced_state(True)
                     self.is_epoch = False
-                
+
                 # Node is not fetching blocks
                 else:
                     # Check if it's epoch before updating state
