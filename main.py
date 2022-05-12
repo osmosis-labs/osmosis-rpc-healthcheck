@@ -39,7 +39,7 @@ app = FastAPI()
 
 controller = TimeController(
     rpc = RPC_NODE,
-    #epoch_start_time = LAST_EPOCH_START_TIME,
+    epoch_start_time = LAST_EPOCH_START_TIME,
     check_interval = CHECK_INTERVAL,
     new_block_threshold = NEW_BLOCK_THRESHOLD,
     slack_webhook = SLACK_WEBHOOK
