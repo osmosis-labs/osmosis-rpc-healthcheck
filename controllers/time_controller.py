@@ -18,7 +18,7 @@ class TimeController():
         self.node_info = self.get_node_info()
         self.sync_info = None
 
-        self.is_synced = None
+        self.in_sync = None
         self.is_epoch = False
 
         self.dt_last_epoch = parser.parse(epoch_start_time)
@@ -44,8 +44,8 @@ class TimeController():
 
     def set_synced_state(self, state):
 
-        if self.is_synced != state:
-            self.is_synced = state
+        if self.in_sync != state:
+            self.in_sync = state
             self.send_alarm()
 
     async def loop(self):
@@ -96,7 +96,7 @@ class TimeController():
 
         webhook = WebhookClient(self.slack_webhook)
 
-        if not self.is_synced:
+        if not self.in_sync:
             response = webhook.send(
                 text="🚨 alarm",
                 blocks=[
